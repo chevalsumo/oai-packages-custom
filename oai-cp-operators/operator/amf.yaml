@@ -119,7 +119,7 @@ metadata: # kpt-merge: oai-cn-operators/oai-amf-op-conf
   name: oai-amf-op-conf
   namespace: oai-cn-operators
   annotations:
-    internal.kpt.dev/upstream-identifier: '|ConfigMap|oai-cn-operators|oai-amf-op-conf'
+    internal.kpt.dev/upstream-identifier: "|ConfigMap|oai-cn-operators|oai-amf-op-conf"
 data:
   amf.yaml: "nad: \n  parent: 'eth0'\n  create: False\n# these ports are here for creating the kube-svc should be same for the nf\nnfInterfaces:\n  n2: 'eth0'\n  sbi: 'eth0'\nports:\n  - name: 'n2'\n    port: 38412\n    protocol: SCTP\n  - name: 'http'\n    port: 80\n    protocol: TCP\ncompute:\n  req:\n    cpu: '100m'\n    memory: '512Mi'\n  limits:\n    cpu: '100m'\n    memory: '512Mi'\nlogLevel: info\nimage: 'docker.io/oaisoftwarealliance/oai-amf:v2.0.1'\nfqdn:\n  smf: 'oai-smf'\n  ausf: 'oai-ausf'\n  nrf: 'oai-nrf'\n  udm: 'oai-udm'\n"
 ---
