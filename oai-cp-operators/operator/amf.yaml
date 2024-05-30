@@ -16,62 +16,68 @@
 ##################################################################################
 apiVersion: v1
 kind: ServiceAccount
-metadata:
+metadata: # kpt-merge: oai-cn-operators/oai-amf-operator
   namespace: oai-cn-operators
   name: oai-amf-operator
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|ServiceAccount|oai-cn-operators|oai-amf-operator'
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
-metadata:
+metadata: # kpt-merge: /oai-amf-operator-cluster-role
   name: oai-amf-operator-cluster-role
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|ClusterRole|default|oai-amf-operator-cluster-role'
 rules:
-  - apiGroups: [""]
-    resources: [events]
-    verbs: [create]
-  - apiGroups: ["security.openshift.io"]
-    resources: ["securitycontextconstraints"]
-    resourceNames: ["anyuid"]
-    verbs: [use]
-  - apiGroups: [apiextensions.k8s.io]
-    resources: [customresourcedefinitions]
-    verbs: [get, list, watch, create, update, patch]
-  - apiGroups: ["ref.nephio.org"]
-    resources: [configs,config]
-    verbs: [list, watch, update, patch, get]
-  - apiGroups: ["rbac.authorization.k8s.io"]
-    resources: [roles,rolebindings]
-    verbs: [get, create, delete, patch]
-  - apiGroups: ["workload.nephio.org"]
-    resources: [nfdeployments,nfdeployments/status,nfconfigs,nfdeployments/finalizers]
-    verbs: [get, list, watch, update, patch]
-  - apiGroups: [""]
-    resources: [pods,serviceaccounts,configmaps,services,services/finalizers,serviceaccounts/finalizers]
-    verbs:  [get, list, watch, create, update, patch, delete]
-  - apiGroups: ["apps","extensions"]
-    resources: [deployments,deployments/status,deployments/finalizers]
-    verbs:  [get, list, watch, create, update, patch, delete]
-  - apiGroups: ["k8s.cni.cncf.io"]
-    resources: [network-attachment-definitions]
-    verbs: [get, list, watch, create, update, patch, delete]
-  - apiGroups: [""]
-    resources: [namespaces]
-    verbs: [list, watch]
-  - apiGroups: [admissionregistration.k8s.io/v1, admissionregistration.k8s.io/v1beta1]
-    resources: [validatingwebhookconfigurations, mutatingwebhookconfigurations]
-    verbs: [create, patch]
+- apiGroups: [""]
+  resources: [events]
+  verbs: [create]
+- apiGroups: ["security.openshift.io"]
+  resources: ["securitycontextconstraints"]
+  resourceNames: ["anyuid"]
+  verbs: [use]
+- apiGroups: [apiextensions.k8s.io]
+  resources: [customresourcedefinitions]
+  verbs: [get, list, watch, create, update, patch]
+- apiGroups: ["ref.nephio.org"]
+  resources: [configs, config]
+  verbs: [list, watch, update, patch, get]
+- apiGroups: ["rbac.authorization.k8s.io"]
+  resources: [roles, rolebindings]
+  verbs: [get, create, delete, patch]
+- apiGroups: ["workload.nephio.org"]
+  resources: [nfdeployments, nfdeployments/status, nfconfigs, nfdeployments/finalizers]
+  verbs: [get, list, watch, update, patch]
+- apiGroups: [""]
+  resources: [pods, serviceaccounts, configmaps, services, services/finalizers, serviceaccounts/finalizers]
+  verbs: [get, list, watch, create, update, patch, delete]
+- apiGroups: ["apps", "extensions"]
+  resources: [deployments, deployments/status, deployments/finalizers]
+  verbs: [get, list, watch, create, update, patch, delete]
+- apiGroups: ["k8s.cni.cncf.io"]
+  resources: [network-attachment-definitions]
+  verbs: [get, list, watch, create, update, patch, delete]
+- apiGroups: [""]
+  resources: [namespaces]
+  verbs: [list, watch]
+- apiGroups: [admissionregistration.k8s.io/v1, admissionregistration.k8s.io/v1beta1]
+  resources: [validatingwebhookconfigurations, mutatingwebhookconfigurations]
+  verbs: [create, patch]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
-metadata:
+metadata: # kpt-merge: /oai-amf-operator-rolebinding-cluster
   name: oai-amf-operator-rolebinding-cluster
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'rbac.authorization.k8s.io|ClusterRoleBinding|default|oai-amf-operator-rolebinding-cluster'
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: oai-amf-operator-cluster-role
 subjects:
-  - kind: ServiceAccount
-    name: oai-amf-operator
-    namespace: oai-cn-operators
+- kind: ServiceAccount
+  name: oai-amf-operator
+  namespace: oai-cn-operators
 ## In case you want to restrict to a namespace uncomment this role and remove the rights from cluster role
 #---
 # apiVersion: rbac.authorization.k8s.io/v1
@@ -109,45 +115,21 @@ subjects:
 ---
 apiVersion: v1
 kind: ConfigMap
-metadata:
+metadata: # kpt-merge: oai-cn-operators/oai-amf-op-conf
   name: oai-amf-op-conf
   namespace: oai-cn-operators
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|ConfigMap|oai-cn-operators|oai-amf-op-conf'
 data:
-  amf.yaml: |
-    nad: 
-      parent: 'eth0'
-      create: False
-    # these ports are here for creating the kube-svc should be same for the nf
-    nfInterfaces:
-      n2: 'eth0'
-      sbi: 'eth0'
-    ports:
-      - name: 'n2'
-        port: 38412
-        protocol: SCTP
-      - name: 'http'
-        port: 80
-        protocol: TCP
-    compute:
-      req:
-        cpu: '100m'
-        memory: '512Mi'
-      limits:
-        cpu: '100m'
-        memory: '512Mi'
-    logLevel: info
-    image: 'docker.io/oaisoftwarealliance/oai-amf:v2.0.1'
-    fqdn:
-      smf: 'oai-smf'
-      ausf: 'oai-ausf'
-      nrf: 'oai-nrf'
-      udm: 'oai-udm'
+  amf.yaml: "nad: \n  parent: 'eth0'\n  create: False\n# these ports are here for creating the kube-svc should be same for the nf\nnfInterfaces:\n  n2: 'n2'\n  sbi: 'eth0'\nports:\n  - name: 'n2'\n    port: 38412\n    protocol: SCTP\n  - name: 'http'\n    port: 80\n    protocol: TCP\ncompute:\n  req:\n    cpu: '100m'\n    memory: '512Mi'\n  limits:\n    cpu: '100m'\n    memory: '512Mi'\nlogLevel: info\nimage: 'docker.io/oaisoftwarealliance/oai-amf:v2.0.1'\nfqdn:\n  smf: 'oai-smf'\n  ausf: 'oai-ausf'\n  nrf: 'oai-nrf'\n  udm: 'oai-udm'\n"
 ---
 apiVersion: v1
 kind: ConfigMap
-metadata:
+metadata: # kpt-merge: oai-cn-operators/oai-amf-nf-conf
   name: oai-amf-nf-conf
   namespace: oai-cn-operators
+  annotations:
+    internal.kpt.dev/upstream-identifier: '|ConfigMap|oai-cn-operators|oai-amf-nf-conf'
 data:
   amf.yaml: |
     # Log level for all the NFs
@@ -239,11 +221,13 @@ data:
 ---
 apiVersion: apps/v1
 kind: Deployment
-metadata:
+metadata: # kpt-merge: oai-cn-operators/oai-amf-operator
   name: oai-amf-operator
   namespace: oai-cn-operators
   labels:
     app.kubernetes.io/name: oai-amf
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'apps|Deployment|oai-cn-operators|oai-amf-operator'
 spec:
   replicas: 1
   selector:
@@ -264,25 +248,25 @@ spec:
         image: "docker.io/arorasagar/oai-amf-controller:v2.0.1"
         imagePullPolicy: Always
         env:
-          - name: 'NF_TYPE'
-            value: 'amf'
-          - name: 'DEPLOYMENT_FETCH_INTERVAL'
-            value: '1'
-          - name: 'DEPLOYMENT_FETCH_ITERATIONS'
-            value: '100'
-          - name: 'NF_CONF_PATH'
-            value: '/tmp/nf/amf.yaml'
-          - name: 'OP_CONF_PATH'
-            value: '/tmp/op/amf.yaml'
-          - name: 'TESTING'
-            value: 'no'
-          - name: 'KUBERNETES_BASE_URL'
-            value: 'https://kubernetes.default.svc'
+        - name: 'NF_TYPE'
+          value: 'amf'
+        - name: 'DEPLOYMENT_FETCH_INTERVAL'
+          value: '1'
+        - name: 'DEPLOYMENT_FETCH_ITERATIONS'
+          value: '100'
+        - name: 'NF_CONF_PATH'
+          value: '/tmp/nf/amf.yaml'
+        - name: 'OP_CONF_PATH'
+          value: '/tmp/op/amf.yaml'
+        - name: 'TESTING'
+          value: 'no'
+        - name: 'KUBERNETES_BASE_URL'
+          value: 'https://kubernetes.default.svc'
         volumeMounts:
-          - mountPath: /tmp/op
-            name: opconf
-          - mountPath: /tmp/nf
-            name: nfconf
+        - mountPath: /tmp/op
+          name: opconf
+        - mountPath: /tmp/nf
+          name: nfconf
         resources:
           requests:
             memory: "128Mi"
@@ -290,12 +274,12 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "50m"
-        # livenessProbe:
-        #   httpGet:
-        #     path: /healthz
-        #     port: 8080
-        #   initialDelaySeconds: 2
-        #   periodSeconds: 5
+            # livenessProbe:
+            #   httpGet:
+            #     path: /healthz
+            #     port: 8080
+            #   initialDelaySeconds: 2
+            #   periodSeconds: 5
       volumes:
       - configMap:
           name: oai-amf-op-conf
