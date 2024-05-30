@@ -9,7 +9,7 @@ metadata: # kpt-merge: /internet
     internal.kpt.dev/upstream-identifier: 'req.nephio.org|DataNetwork|default|internet'
 spec:
   networkInstance:
-    name: vpc-internet
+    name: default
   pools:
   - name: pool1
     prefixLength: 24
