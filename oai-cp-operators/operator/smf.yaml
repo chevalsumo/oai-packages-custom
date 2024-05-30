@@ -121,7 +121,7 @@ metadata: # kpt-merge: oai-cn-operators/oai-smf-op-conf
   annotations:
     internal.kpt.dev/upstream-identifier: '|ConfigMap|oai-cn-operators|oai-smf-op-conf'
 data:
-  smf.yaml: "nad: \n  parent: 'eth0'\n  create: False\nnfInterfaces:\n  n4: 'n4'\n  sbi: 'eth0'\nports:\n  - name: 'n4'\n    port: 8805\n    protocol: UDP\n  - name: 'sbi'\n    port: 80\n    protocol: TCP\nlogLevel: info\nimage: 'docker.io/oaisoftwarealliance/oai-smf:v2.0.1'\nueSettings:\n  mtu: 1500\n  secondary: 1.1.1.1\nfqdn:\n  nrf: 'oai-nrf'\n  udm: 'oai-udm'\n  amf: 'oai-amf'\ncompute:\n  req:\n    cpu: '100m'\n    memory: '512Mi'\n  limits:\n    cpu: '100m'\n    memory: '512Mi'\n"
+  smf.yaml: "nad: \n  parent: 'eth0'\n  create: False\nnfInterfaces:\n  n4: 'eth0'\n  sbi: 'eth0'\nports:\n  - name: 'n4'\n    port: 8805\n    protocol: UDP\n  - name: 'sbi'\n    port: 80\n    protocol: TCP\nlogLevel: info\nimage: 'docker.io/oaisoftwarealliance/oai-smf:v2.0.1'\nueSettings:\n  mtu: 1500\n  secondary: 1.1.1.1\nfqdn:\n  nrf: 'oai-nrf'\n  udm: 'oai-udm'\n  amf: 'oai-amf'\ncompute:\n  req:\n    cpu: '100m'\n    memory: '512Mi'\n  limits:\n    cpu: '100m'\n    memory: '512Mi'\n"
 ---
 apiVersion: v1
 kind: ConfigMap
