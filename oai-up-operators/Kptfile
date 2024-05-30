@@ -4,7 +4,7 @@ metadata: # kpt-merge: /oai-up-operators
   name: oai-up-operators
   annotations:
     config.kubernetes.io/local-config: "true"
-    internal.kpt.dev/upstream-identifier: kpt.dev|Kptfile|default|oai-up-operators
+    internal.kpt.dev/upstream-identifier: 'kpt.dev|Kptfile|default|oai-up-operators'
 upstream:
   type: git
   git:
