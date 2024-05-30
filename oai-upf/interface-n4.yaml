@@ -9,6 +9,4 @@ metadata: # kpt-merge: /n4
     internal.kpt.dev/upstream-identifier: 'req.nephio.org|Interface|default|n4'
 spec:
   networkInstance:
-    name: vpc-internal
-  cniType: macvlan
-  attachmentType: vlan
+    name: default
