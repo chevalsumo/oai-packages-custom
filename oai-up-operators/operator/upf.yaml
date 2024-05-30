@@ -129,9 +129,9 @@ data:
         protocol: TCP
     nfInterfaces:
       sbi: 'eth0'
-      n3: 'n3'
-      n4: 'n4'
-      n6: 'n6'
+      n3: 'eth0'
+      n4: 'eth0'
+      n6: 'eth0'
       n9: 'eth0'
     compute:
       req:

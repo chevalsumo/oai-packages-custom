@@ -4,13 +4,13 @@ metadata:
   name: oai-up-operators
 spec:
   upstream:
-    repo: oai-packages
+    repo: oai-packages-custom
     package: oai-up-operators
     revision: v2.0.0
   downstream:
-    repo: edge
+    repo: core
     package: oai-up-operators
   annotations:
     approval.nephio.org/policy: initial
   injectors:
-  - name: edge
+  - name: core

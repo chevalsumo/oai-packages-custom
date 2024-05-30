@@ -1,15 +1,15 @@
 apiVersion: config.porch.kpt.dev/v1alpha1
 kind: PackageVariant
 metadata:
-  name: oai-cp-operators
+  name: oai-ran-operator-edge
 spec:
   upstream:
-    repo: oai-packages-custom
-    package: oai-cp-operators
+    repo: catalog-workloads-oai-ran
+    package: oai-ran-operator
     revision: v2.0.0
   downstream:
     repo: core
-    package: oai-cp-operators
+    package: oai-ran-operator
   annotations:
     approval.nephio.org/policy: initial
   injectors:

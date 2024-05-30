@@ -118,7 +118,7 @@ data:
       parent: 'eth0'
       create: False
     nfInterfaces:
-      n4: 'n4'
+      n4: 'eth0'
       sbi: 'eth0'
     ports:
       - name: 'n4'
