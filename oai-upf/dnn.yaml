@@ -5,11 +5,11 @@ metadata: # kpt-merge: /internet
   annotations:
     config.kubernetes.io/local-config: "true"
     specializer.nephio.org/owner: workload.nephio.org/v1alpha1.NFDeployment.upf-example
-    specializer.nephio.org/namespace: oai-core
+    specializer.nephio.org/namespace: example
     internal.kpt.dev/upstream-identifier: 'req.nephio.org|DataNetwork|default|internet'
 spec:
   networkInstance:
-    name: default
+    name: vpc-internet
   pools:
   - name: pool1
     prefixLength: 24
