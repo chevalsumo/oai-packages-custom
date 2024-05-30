@@ -4,7 +4,7 @@ metadata:
   name: oai-up-operators
 spec:
   upstream:
-    repo: oai-packages-custom
+    repo: oai-core-packages-custom
     package: oai-up-operators
     revision: v2.0.0
   downstream:

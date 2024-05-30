@@ -1,0 +1,18 @@
+apiVersion: config.porch.kpt.dev/v1alpha1
+kind: Repository
+metadata:
+  labels:
+    kpt.dev/repository-access: read-only
+    kpt.dev/repository-content: external-blueprints
+  name: oai-core-packages-custom
+  namespace: default
+  resourceVersion: "3356"
+  uid: 7fa88cc8-a85f-4177-a54a-aecedd3b8222
+spec:
+  content: Package
+  deployment: false
+  git:
+    branch: main
+    directory: /
+    repo: https://github.com/chevalsumo/oai-packages-custom.git
+  type: git
