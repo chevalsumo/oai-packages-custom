@@ -4,13 +4,13 @@ metadata:
   name: edge-oai-upf
 spec:
   upstream:
-    repo: oai-core-packages-custom
-    package: oai-upf
-    revision: v4
+    repo: oai-packages
+    package: oai-upf-edge
+    revision: v2.0.0
   downstream:
-    repo: core
+    repo: edge
     package: oai-upf
   annotations:
     approval.nephio.org/policy: initial
   injectors:
-  - name: core
+  - name: edge
