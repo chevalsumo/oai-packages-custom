@@ -8,6 +8,4 @@ metadata:
     specializer.nephio.org/namespace: example
 spec:
   networkInstance:
-    name: vpc-internal
-  cniType: macvlan
-  attachmentType: vlan
+    name: default
