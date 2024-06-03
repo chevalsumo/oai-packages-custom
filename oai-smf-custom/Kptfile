@@ -5,7 +5,3 @@ metadata:
   annotations:
     config.kubernetes.io/local-config: "true"
 info: {}
-pipeline:
-  validators:
-  - image: gcr.io/kpt-fn/kubeval:v0.3.0
-    configPath: kubeval-config.yaml
