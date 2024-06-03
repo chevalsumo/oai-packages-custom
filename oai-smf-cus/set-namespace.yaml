@@ -4,8 +4,4 @@ metadata:
   name: set-namespace
   annotations:
     config.kubernetes.io/local-config: "true"
-<<<<<<< HEAD
 namespace: oai-smf-cus
-=======
-namespace: oai-smf-cusècys
->>>>>>> 8e8a6885c67bf631b644135b1480189ad9a2c303
