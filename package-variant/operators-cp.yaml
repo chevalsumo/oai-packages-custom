@@ -6,7 +6,7 @@ spec:
   upstream:
     repo: oai-core-packages-custom
     package: oai-cp-operators
-    revision: v2.0.0
+    revision: v2
   downstream:
     repo: core
     package: oai-cp-operators

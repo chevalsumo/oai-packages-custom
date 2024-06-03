@@ -1,5 +1,5 @@
-apiVersion: config.porch.kpt.dev/v1alpha2
-kind: PackageVariantSet
+apiVersion: config.porch.kpt.dev/v1alpha1
+kind: PackageVariant
 metadata:
   name: core-oai-smf
 spec:
@@ -7,16 +7,9 @@ spec:
     repo: oai-packages
     package: oai-smf
     revision: v2.0.0
-  targets:
-  - objectSelector:
-      apiVersion: infra.nephio.org/v1alpha1
-      kind: WorkloadCluster
-      matchLabels:
-        nephio.org/site-type: core
-    template:
-      downstream:
-        package: oai-smf
-      annotations:
-        approval.nephio.org/policy: initial
-      injectors:
-      - nameExpr: target.name
+  downstream:
+    repo: oai-core-packages-custom
+    package: oai-smf
+  annotations:
+    approval.nephio.org/policy: initial
+    
