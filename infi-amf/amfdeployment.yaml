@@ -1,0 +1,23 @@
+apiVersion: workload.nephio.org/v1alpha1
+kind: NFDeployment
+metadata: # kpt-merge: amf-example/amf-example
+  name: amf-example
+  namespace: oai-core
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'workload.nephio.org|NFDeployment|amf-example|amf-example'
+spec:
+  provider: amf.openairinterface.org
+  interfaces:
+  - name: n2
+    ipv4:
+      address: 172.18.0.17/24
+      gateway: 172.18.0.1
+    vlanID: 2
+  networkInstances:
+  - name: vpc-ran
+    interfaces:
+    - n2
+  parametersRefs:
+  - name: oai-amf-config
+    apiVersion: workload.nephio.org/v1alpha1
+    kind: NFConfig
