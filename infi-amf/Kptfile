@@ -47,3 +47,6 @@ status:
   - message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
     status: "False"
     type: req.nephio.org/v1alpha1.Interface.sbi
+  - message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
+    status: "False"
+    type: k8s.cni.cncf.io/v1.NetworkAttachmentDefinition.amf-core-n2
