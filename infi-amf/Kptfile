@@ -4,7 +4,7 @@ metadata: # kpt-merge: /infi-amf
   name: infi-amf
   annotations:
     config.kubernetes.io/local-config: "true"
-    internal.kpt.dev/upstream-identifier: kpt.dev|Kptfile|default|infi-amf
+    internal.kpt.dev/upstream-identifier: 'kpt.dev|Kptfile|default|infi-amf'
 upstream:
   type: git
   git:
@@ -20,8 +20,6 @@ upstreamLock:
     commit: e4173c8f98518872f26c961e190c7e430e0fb85d
 info:
   description: example amf blueprint package
-  readinessGates:
-  - conditionType: nephio.org.Specializer.specialize
 pipeline:
   mutators:
   - image: gcr.io/kpt-fn/apply-replacements:v0.1.1
@@ -35,18 +33,3 @@ pipeline:
   - image: docker.io/nephio/nad-fn:v2.0.0
   - image: docker.io/nephio/interface-fn:v2.0.0
   - image: docker.io/nephio/nfdeploy-fn:v2.0.0
-status:
-  conditions:
-  - message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
-    reason: Failed
-    status: "False"
-    type: nephio.org.Specializer.specialize
-  - message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
-    status: "False"
-    type: req.nephio.org/v1alpha1.Interface.n2
-  - message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
-    status: "False"
-    type: req.nephio.org/v1alpha1.Interface.sbi
-  - message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
-    status: "False"
-    type: k8s.cni.cncf.io/v1.NetworkAttachmentDefinition.amf-core-n2
