@@ -11,3 +11,29 @@ spec:
   - name: oai-upf-config
     apiVersion: workload.nephio.org/v1alpha1
     kind: NFConfig
+  interfaces:
+  - name: n3
+    ipv4:
+      address: 172.18.0.18/24
+      gateway: 172.18.0.1
+    vlanID: 3
+  - name: n4
+    ipv4:
+      address: 172.18.0.19/24
+      gateway: 172.18.0.1
+    vlanID: 4
+  - name: n6
+    ipv4:
+      address: 172.18.0.20/24
+      gateway: 172.18.0.1
+    vlanID: 6
+  networkInstances:
+  - name: vpc-internal
+    interfaces:
+    - n4
+  - name: vpc-internet
+    interfaces:
+    - n6
+  - name: vpc-ran
+    interfaces:
+    - n3
