@@ -1,21 +1,36 @@
 apiVersion: kpt.dev/v1
 kind: Kptfile
-metadata:
-  name: pkg-smf
+metadata: # kpt-merge: /oai-smf
+  name: oai-smf
   annotations:
     config.kubernetes.io/local-config: "true"
+    internal.kpt.dev/upstream-identifier: kpt.dev|Kptfile|default|oai-smf
+upstream:
+  type: git
+  git:
+    repo: https://github.com/OPENAIRINTERFACE/oai-packages.git
+    directory: oai-smf
+    ref: r2
+upstreamLock:
+  type: git
+  git:
+    repo: https://github.com/OPENAIRINTERFACE/oai-packages.git
+    directory: oai-smf
+    ref: r2
+    commit: 760daaacfc7754baf244b7dee9b6ac1aa6550da8
 info:
   description: example smf blueprint package
 pipeline:
   mutators:
-    - image: gcr.io/kpt-fn/apply-replacements:v0.1.1
-      configPath: apply-replacements-owner.yaml
-    - image: gcr.io/kpt-fn/apply-replacements:v0.1.1
-      configPath: apply-replacements-namespace.yaml
-    - image: gcr.io/kpt-fn/set-namespace:v0.4.1
-      configPath: cm-namespace.yaml
-    - image: docker.io/nephio/nfdeploy-fn:v2.0.0
-    - image: docker.io/nephio/interface-fn:v2.0.0
-    - image: docker.io/nephio/nad-fn:v2.0.0
-    - image: docker.io/nephio/interface-fn:v2.0.0
-    - image: docker.io/nephio/nfdeploy-fn:v2.0.0
+  - image: gcr.io/kpt-fn/apply-replacements:v0.1.1
+    configPath: apply-replacements-owner.yaml
+  - image: gcr.io/kpt-fn/apply-replacements:v0.1.1
+    configPath: apply-replacements-namespace.yaml
+  - image: gcr.io/kpt-fn/set-namespace:v0.4.1
+    configPath: cm-namespace.yaml
+status:
+  conditions:
+  - type: config.injection.WorkloadCluster.workload-cluster
+    status: "False"
+    message: no injectors defined
+    reason: NoResourceSelected
