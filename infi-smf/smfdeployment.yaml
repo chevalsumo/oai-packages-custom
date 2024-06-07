@@ -2,21 +2,11 @@ apiVersion: workload.nephio.org/v1alpha1
 kind: NFDeployment
 metadata: # kpt-merge: smf-example/smf-example
   name: smf-example
-  namespace: oai-core
+  namespace: smf-example
   annotations:
     internal.kpt.dev/upstream-identifier: 'workload.nephio.org|NFDeployment|smf-example|smf-example'
 spec:
   provider: smf.openairinterface.org
-  interfaces:
-  - name: n4
-    ipv4:
-      address: 172.18.0.21/24
-      gateway: 172.18.0.1
-    vlanID: 4
-  networkInstances:
-  - name: vpc-internal
-    interfaces:
-    - n4
   parametersRefs:
   - name: oai-smf-config
     apiVersion: workload.nephio.org/v1alpha1

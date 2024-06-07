@@ -2,7 +2,7 @@ apiVersion: workload.nephio.org/v1alpha1
 kind: NFConfig
 metadata: # kpt-merge: example/oai-smf-config
   name: oai-smf-config
-  namespace: oai-core
+  namespace: example
   annotations:
     internal.kpt.dev/upstream-identifier: 'workload.nephio.org|NFConfig|example|oai-smf-config'
 spec:
@@ -24,4 +24,3 @@ spec:
           - name: internet
             sessionType: ipv4
             dns: 8.8.8.8
-            subnet: 10.1.0.0/24
