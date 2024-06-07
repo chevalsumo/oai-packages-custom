@@ -1,25 +1,26 @@
----
 apiVersion: workload.nephio.org/v1alpha1
 kind: NFConfig
-metadata:
+metadata: # kpt-merge: example/oai-smf-config
   name: oai-smf-config
   namespace: example
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'workload.nephio.org|NFConfig|example|oai-smf-config'
 spec:
   configRefs:
-    - apiVersion: cellular.nephio.org/v1alpha1
-      kind: PLMN
-      metadata:
-        name: oai-plmn
-      spec:
-        plmnInfo:
-          - plmnID:
-              mcc: "001"
-              mnc: "01"
-            tac: 1
-            nssai:
-              - sst: 1
-                sd: ffffff
-                dnnInfo:
-                  - name: internet
-                    sessionType: ipv4
-                    dns: 8.8.8.8
+  - apiVersion: cellular.nephio.org/v1alpha1
+    kind: PLMN
+    metadata:
+      name: oai-plmn
+    spec:
+      plmnInfo:
+      - plmnID:
+          mcc: "001"
+          mnc: "01"
+        tac: 1
+        nssai:
+        - sst: 1
+          sd: ffffff
+          dnnInfo:
+          - name: internet
+            sessionType: ipv4
+            dns: 8.8.8.8
