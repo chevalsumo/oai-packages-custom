@@ -42,6 +42,9 @@ status:
     status: "False"
     message: no injectors defined
     reason: NoResourceSelected
+  - type: k8s.cni.cncf.io/v1.NetworkAttachmentDefinition.smf-core-n4
+    status: "False"
+    message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
   - type: nephio.org.Specializer.specialize
     status: "False"
     message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
@@ -55,6 +58,3 @@ status:
   - type: req.nephio.org/v1alpha1.Interface.sbi
     status: "False"
     message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
-  - message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
-    status: "False"
-    type: k8s.cni.cncf.io/v1.NetworkAttachmentDefinition.smf-core-n4
