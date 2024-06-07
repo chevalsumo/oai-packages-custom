@@ -4,7 +4,7 @@ metadata: # kpt-merge: /infi-smf
   name: infi-smf
   annotations:
     config.kubernetes.io/local-config: "true"
-    internal.kpt.dev/upstream-identifier: 'kpt.dev|Kptfile|default|infi-smf'
+    internal.kpt.dev/upstream-identifier: kpt.dev|Kptfile|default|infi-smf
 upstream:
   type: git
   git:
@@ -19,9 +19,6 @@ upstreamLock:
     ref: r2
     commit: 760daaacfc7754baf244b7dee9b6ac1aa6550da8
 info:
-  readinessGates:
-  - conditionType: config.injection.WorkloadCluster.workload-cluster
-  - conditionType: nephio.org.Specializer.specialize
   description: example smf blueprint package
 pipeline:
   mutators:
@@ -31,27 +28,3 @@ pipeline:
     configPath: apply-replacements-namespace.yaml
   - image: gcr.io/kpt-fn/set-namespace:v0.4.1
     configPath: cm-namespace.yaml
-  - image: docker.io/nephio/nfdeploy-fn:v2.0.0
-  - image: docker.io/nephio/interface-fn:v2.0.0
-  - image: docker.io/nephio/nad-fn:v2.0.0
-  - image: docker.io/nephio/interface-fn:v2.0.0
-  - image: docker.io/nephio/nfdeploy-fn:v2.0.0
-status:
-  conditions:
-  - type: config.injection.WorkloadCluster.workload-cluster
-    status: "False"
-    message: no injectors defined
-    reason: NoResourceSelected
-  - type: nephio.org.Specializer.specialize
-    status: "False"
-    message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
-    reason: Failed
-  - type: req.nephio.org/v1alpha1.Interface.n11
-    status: "False"
-    message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
-  - type: req.nephio.org/v1alpha1.Interface.n4
-    status: "False"
-    message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
-  - type: req.nephio.org/v1alpha1.Interface.sbi
-    status: "False"
-    message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
