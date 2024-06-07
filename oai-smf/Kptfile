@@ -19,9 +19,6 @@ upstreamLock:
     ref: r2
     commit: 760daaacfc7754baf244b7dee9b6ac1aa6550da8
 info:
-  readinessGates:
-  - conditionType: config.injection.WorkloadCluster.workload-cluster
-  - conditionType: nephio.org.Specializer.specialize
   description: example smf blueprint package
 pipeline:
   mutators:
