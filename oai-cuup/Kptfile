@@ -20,6 +20,8 @@ upstreamLock:
     commit: f4e99a9f506951405a3e200b52c58318f6f75efa
 info:
   description: example cuup blueprint package
+  readinessGates:
+  - conditionType: nephio.org.Specializer.specialize
 pipeline:
   mutators:
   - image: gcr.io/kpt-fn/apply-replacements:v0.1.1
@@ -33,3 +35,18 @@ pipeline:
   - image: docker.io/nephio/nad-fn:v2.0.0
   - image: docker.io/nephio/interface-fn:v2.0.0
   - image: nephio/nfdeploy-fn:v2.0.0
+status:
+  conditions:
+  - message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
+    reason: Failed
+    status: "False"
+    type: nephio.org.Specializer.specialize
+  - message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
+    status: "False"
+    type: req.nephio.org/v1alpha1.Interface.e1
+  - message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
+    status: "False"
+    type: req.nephio.org/v1alpha1.Interface.f1u
+  - message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
+    status: "False"
+    type: req.nephio.org/v1alpha1.Interface.n3
