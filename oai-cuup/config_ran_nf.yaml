@@ -11,7 +11,7 @@ spec:
     kind: RANConfig
     metadata:
       name: ranconfig
-      namespace: default
+      namespace: example
     spec:
       cellIdentity: 12345678L
       physicalCellID: 0
@@ -26,7 +26,7 @@ spec:
     kind: PLMN
     metadata:
       name: plmn
-      namespace: default
+      namespace: example
     spec:
       PLMNInfo:
       - plmnID:
@@ -40,6 +40,6 @@ spec:
     kind: OAIConfig
     metadata:
       name: oai-nf-config
-      namespace: default
+      namespace: example
     spec:
       image: "docker.io/oaisoftwarealliance/oai-nr-cuup:2023.w19"
