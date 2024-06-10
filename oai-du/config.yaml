@@ -18,22 +18,22 @@ spec:
         internal.config.kubernetes.io/path: cucpdeployment.yaml
         internal.kpt.dev/upstream-identifier: workload.nephio.org|NFDeployment|example|cucp-example
     spec:
-    interfaces:
-    - name: n2
-      ipv4:
-        address: 172.18.0.22/24
-        gateway: 172.18.0.1
-      vlanID: 2
-    - name: f1c
-      ipv4:
-        address: 172.18.0.23/24
-        gateway: 172.18.0.1
-      vlanID: 5
-    - name: e1
-      ipv4:
-        address: 172.18.0.24/24
-        gateway: 172.18.0.1
-      vlanID: 1
+      interfaces:
+      - name: n2
+        ipv4:
+          address: 172.18.0.22/24
+          gateway: 172.18.0.1
+        vlanID: 2
+      - name: f1c
+        ipv4:
+          address: 172.18.0.23/24
+          gateway: 172.18.0.1
+        vlanID: 5
+      - name: e1
+        ipv4:
+          address: 172.18.0.24/24
+          gateway: 172.18.0.1
+        vlanID: 1
     parametersRefs:
     - name: oai-cucp-config
       apiVersion: workload.nephio.org/v1alpha1
