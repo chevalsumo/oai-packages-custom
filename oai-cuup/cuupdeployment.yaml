@@ -3,38 +3,11 @@ kind: NFDeployment
 metadata: # kpt-merge: example/cuup-example
   name: cuup-example
   namespace: example
+  annotations:
+    internal.kpt.dev/upstream-identifier: 'workload.nephio.org|NFDeployment|example|cuup-example'
 spec:
   provider: cuup.openairinterface.org
-  interfaces:
-  - name: n3
-    ipv4:
-      address: 172.18.0.25/24
-      gateway: 172.18.0.1
-    vlanID: 3
-  - name: f1u
-    ipv4:
-      address: 172.18.0.26/24
-      gateway: 172.18.0.1
-    vlanID: 5
-  - name: e1
-    ipv4:
-      address: 172.18.0.27/24
-      gateway: 172.18.0.1
-    vlanID: 1
-  networkInstances:
-  - name: vpc-ran
-    interfaces:
-    - n3
-  - name: vpc-cudu-f1
-    interfaces:
-    - f1u
-  - name: vpc-cu-e1
-    interfaces:
-    - e1
   parametersRefs:
-  - name: oai-cuup-config
-    apiVersion: workload.nephio.org/v1alpha1
+  - apiVersion: workload.nephio.org/v1alpha1
     kind: NFConfig
-  - apiVersion: ref.nephio.org/v1alpha1
-    kind: Config
-    name: oai-cucp-config
+    name: cuup-nf-config
