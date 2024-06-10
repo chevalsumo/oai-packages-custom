@@ -4,7 +4,7 @@ metadata: # kpt-merge: /oai-cuup
   name: oai-cuup
   annotations:
     config.kubernetes.io/local-config: "true"
-    internal.kpt.dev/upstream-identifier: 'kpt.dev|Kptfile|default|oai-cuup'
+    internal.kpt.dev/upstream-identifier: kpt.dev|Kptfile|default|oai-cuup
 upstream:
   type: git
   git:
@@ -21,7 +21,6 @@ upstreamLock:
 info:
   readinessGates:
   - conditionType: config.injection.WorkloadCluster.workload-cluster
-  - conditionType: nephio.org.Specializer.specialize
   description: example cuup blueprint package
 pipeline:
   mutators:
@@ -31,27 +30,9 @@ pipeline:
     configPath: apply-replacements-namespace.yaml
   - image: gcr.io/kpt-fn/set-namespace:v0.4.1
     configPath: package-context.yaml
-  - image: nephio/nfdeploy-fn:v2.0.0
-  - image: docker.io/nephio/interface-fn:v2.0.0
-  - image: docker.io/nephio/nad-fn:v2.0.0
-  - image: docker.io/nephio/interface-fn:v2.0.0
-  - image: nephio/nfdeploy-fn:v2.0.0
 status:
   conditions:
   - type: config.injection.WorkloadCluster.workload-cluster
     status: "False"
     message: no injectors defined
     reason: NoResourceSelected
-  - type: nephio.org.Specializer.specialize
-    status: "False"
-    message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
-    reason: Failed
-  - type: req.nephio.org/v1alpha1.Interface.e1
-    status: "False"
-    message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
-  - type: req.nephio.org/v1alpha1.Interface.f1u
-    status: "False"
-    message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
-  - type: req.nephio.org/v1alpha1.Interface.n3
-    status: "False"
-    message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
