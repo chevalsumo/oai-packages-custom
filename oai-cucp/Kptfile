@@ -1,0 +1,38 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata: # kpt-merge: /oai-cucp
+  name: oai-cucp
+  annotations:
+    config.kubernetes.io/local-config: "true"
+    internal.kpt.dev/upstream-identifier: kpt.dev|Kptfile|default|oai-cucp
+upstream:
+  type: git
+  git:
+    repo: https://github.com/nephio-project/catalog.git
+    directory: workloads/oai/pkg-example-cucp-bp
+    ref: workloads/oai/pkg-example-cucp-bp/v2.0.0
+upstreamLock:
+  type: git
+  git:
+    repo: https://github.com/nephio-project/catalog.git
+    directory: workloads/oai/pkg-example-cucp-bp
+    ref: workloads/oai/pkg-example-cucp-bp/v2.0.0
+    commit: f4e99a9f506951405a3e200b52c58318f6f75efa
+info:
+  readinessGates:
+  - conditionType: config.injection.WorkloadCluster.workload-cluster
+  description: example cucp blueprint package
+pipeline:
+  mutators:
+  - image: gcr.io/kpt-fn/apply-replacements:v0.1.1
+    configPath: apply-replacements-owner.yaml
+  - image: gcr.io/kpt-fn/apply-replacements:v0.1.1
+    configPath: apply-replacements-namespace.yaml
+  - image: gcr.io/kpt-fn/set-namespace:v0.4.1
+    configPath: package-context.yaml
+status:
+  conditions:
+  - type: config.injection.WorkloadCluster.workload-cluster
+    status: "False"
+    message: no injectors defined
+    reason: NoResourceSelected
