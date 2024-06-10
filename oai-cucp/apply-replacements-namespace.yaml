@@ -1,21 +1,23 @@
 apiVersion: fn.kpt.dev/v1alpha1
 kind: ApplyReplacements
-metadata: # kpt-merge: /replace-namespace
-  name: replace-namespace
+metadata:
+  name: propagate-namespace
   annotations:
     config.kubernetes.io/local-config: "true"
-    internal.kpt.dev/upstream-identifier: fn.kpt.dev|ApplyReplacements|default|replace-namespace
 replacements:
 - source:
     kind: ConfigMap
-    name: kptfile.kpt.dev
-    fieldPath: data.name
+    name: namespace
+    fieldPath: data.namespace
   targets:
   - select:
-      kind: Config
-      name: ""
+      kind: Namespace
     fieldPaths:
-    - metadata.namespace
+    - metadata.name
+  - select:
+      kind: NFConfig
+    fieldPaths:
+    - metadata.annotations.[specializer.nephio.org/namespace]
   - select:
       kind: NetworkAttachmentDefinition
     fieldPaths:
