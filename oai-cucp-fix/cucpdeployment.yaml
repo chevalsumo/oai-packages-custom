@@ -37,3 +37,6 @@ spec:
   - apiVersion: workload.nephio.org/v1alpha1
     kind: NFConfig
     name: cucp-nf-config
+  - name: cucp-ran-amf-core
+    apiVersion: ref.nephio.org/v1alpha1
+    kind: Config
