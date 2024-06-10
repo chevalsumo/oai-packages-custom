@@ -32,7 +32,7 @@ spec:
     interfaces:
     - e1
   parametersRefs:
-  - name: oai-cuup-config
+  - name: cuup-nf-config
     apiVersion: workload.nephio.org/v1alpha1
     kind: NFConfig
   - apiVersion: ref.nephio.org/v1alpha1
